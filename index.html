@@ -47,15 +47,13 @@ body{position:relative}
 
 /* Stage container */
 .stage{
-  position:fixed;top:0;left:0;width:100%;min-height:100dvh;
-  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding:40px 20px calc(100px + env(safe-area-inset-bottom));z-index:1;
-  opacity:0;pointer-events:none;
-  transition:opacity 0.8s ease;
-  overflow-y:auto;overflow-x:hidden;
-  -webkit-overflow-scrolling:touch;
+  display:none;
+  width:100%;min-height:100dvh;
+  flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:40px 20px calc(100px + env(safe-area-inset-bottom));
+  z-index:1;
 }
-.stage.active{opacity:1;pointer-events:auto}
+.stage.active{display:flex}
 .stage-inner{
   width:100%;max-width:420px;
   display:flex;flex-direction:column;align-items:center;
@@ -384,15 +382,13 @@ p.reveal-msg.show{opacity:1}
 }
 .btn-yes.show{opacity:1}
 .celebration{
-  position:fixed;top:0;left:0;width:100%;min-height:100dvh;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:none;
+  width:100%;min-height:100dvh;
+  flex-direction:column;align-items:center;justify-content:center;
   gap:24px;padding:20px 20px calc(80px + env(safe-area-inset-bottom));z-index:100;
-  opacity:0;pointer-events:none;
-  transition:opacity 1s ease;
   background:var(--bg-deep);
-  overflow-y:auto;-webkit-overflow-scrolling:touch;
 }
-.celebration.active{opacity:1;pointer-events:auto}
+.celebration.active{display:flex}
 .photo-collage{
   display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
   max-width:360px;
@@ -628,7 +624,7 @@ function goToStage(n){
   currentStage=n;
   const stageEl=document.getElementById('stage'+n);
   stageEl.classList.add('active');
-  stageEl.scrollTop=0;
+  window.scrollTo(0,0);
   updateProgress();
   if(n===1)initJigsaw();
   if(n===2)initScramble();
